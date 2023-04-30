@@ -64,7 +64,7 @@ app.get('/user', (req, res) => {
 });
 
 //Login
-app.get('/user/login', (req, res) => {
+app.post('/user/login', (req, res) => {
   const { email, password } = req.body
   const encryptPassword = encrypt(password);
 
