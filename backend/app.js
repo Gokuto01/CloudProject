@@ -7,9 +7,9 @@ const app = express();
 app.use(bodyParser.json());
 
 const connection = mysql.createConnection({
-  host: 'mydb.cq7bbmbiyelo.us-east-1.rds.amazonaws.com',
+  host: 'database-1.c4ge7ygbihr4.us-east-1.rds.amazonaws.com',
   user: 'root',
-  password: 'Golf1112',
+  password: 'DUKjfy15',
   database: 'sop'
 });
 
