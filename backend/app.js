@@ -6,12 +6,6 @@ const { v4: uuidv4 } = require('uuid');
 const app = express();
 app.use(bodyParser.json());
 
-app.post('/webhook', (req, res) => {
-  console.log('Received webhook event');
-  // TODO: Handle the event data here
-  res.sendStatus(200);
-});
-
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
