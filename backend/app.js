@@ -176,12 +176,12 @@ app.put('/promotion/useCode', (req, res) => {
             });
         }
         if(status){
-          data = rows.discount;
+          data = parseInt(rows[0].discount);
         }
         else{
-          data = 0
+          data = 0;
         }
-        res.send(data)
+        res.send(data);
       }
     });
 });
