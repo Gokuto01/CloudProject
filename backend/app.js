@@ -158,7 +158,7 @@ app.delete('/promotion', (req, res) => {
 //usePromotionCode
 app.put('/promotion/useCode', (req, res) => {
   const { code } = req.body;
-  cosnole.log(code)
+  console.log(code)
   connection.query('SELECT * FROM promotion WHERE code = ?', [code], (error, results) => {
     if (error) {
       console.error(error);
