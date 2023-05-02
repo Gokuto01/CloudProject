@@ -159,11 +159,12 @@ app.delete('/promotion', (req, res) => {
 app.put('/promotion/useCode', (req, res) => {
   const { code } = req.body;
   let data;
-  let status = false;
+  let discount = 0;
   connection.query('SELECT * FROM promotion where code = ?', [code], (err, rows, fields) => {
       if (err) {
         console.error('Error executing query: ', err);
       } else {
+        discount = rows.discount;
         data = rows;
         if (data[0].discount >= 1){
           connection.query('UPDATE promotion SET code = ?, quantity = ?, discount = ? WHERE code = ?',
@@ -171,17 +172,11 @@ app.put('/promotion/useCode', (req, res) => {
               if (err) {
                 console.error('Error executing query: ', err);
               } else {
-                status = true;
+                discount = 0
               }
             });
         }
-        if(status){
-          data = rows.discount;
-        }
-        else{
-          data = 0
-        }
-        res.send(String(data)); // convert the integer to a string before sending the response
+        res.send(String(data));
       }
     });
 });
