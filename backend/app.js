@@ -327,7 +327,7 @@ app.put('/rest', (req, res) => {
 //get seat
 app.post('/seat', (req, res) => {
   const { id } = req.body;
-  connection.query('SELECT * FROM seat where rest_id = ?', [id], (err, rows, fields) => {
+  connection.query('SELECT * FROM seat where rest_id = ? order by table_no', [id], (err, rows, fields) => {
     if (err) {
       console.error('Error executing query: ', err);
     } else {
