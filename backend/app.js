@@ -159,7 +159,7 @@ app.delete('/promotion', (req, res) => {
 app.put('/promotion/useCode', (req, res) => {
   const { code } = req.body;
 
-  connection.query('SELECT * FROM Promotion WHERE code = ?', [code], (error, results) => {
+  connection.query('SELECT * FROM promotion WHERE code = ?', [code], (error, results) => {
     if (error) {
       console.error(error);
       return res.status(500).send('Internal server error');
@@ -168,7 +168,7 @@ app.put('/promotion/useCode', (req, res) => {
     const { data } = results[0];
 
     if (data.quantity >= 1){
-      connection.query('UPDATE Promotion SET quantity = ? WHERE code = ?', [data.discount - 1, code], (error) => {
+      connection.query('UPDATE promotion SET quantity = ? WHERE code = ?', [data.discount - 1, code], (error) => {
             if (error) {
               console.error(error);
               return res.status(500).send('Internal server error');
