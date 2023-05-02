@@ -159,6 +159,7 @@ app.delete('/promotion', (req, res) => {
 app.put('/promotion/useCode', (req, res) => {
   const { code } = req.body;
   let data;
+  let status = false;
   connection.query('SELECT * FROM promotion where code = ?', [code], (err, rows, fields) => {
       if (err) {
         console.error('Error executing query: ', err);
@@ -170,10 +171,17 @@ app.put('/promotion/useCode', (req, res) => {
               if (err) {
                 console.error('Error executing query: ', err);
               } else {
-                res.send(rows);
+                status = true;
               }
             });
         }
+        if(status){
+          data = rows.discount;
+        }
+        else{
+          data = 0
+        }
+        res.send(data)
       }
     });
 });
