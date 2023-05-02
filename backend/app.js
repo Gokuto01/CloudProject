@@ -162,9 +162,9 @@ app.put('/promotion/useCode', (req, res) => {
     if (err) {
       console.error('Error executing query: ', err);
     } else {
-      res.send(rows);
+//       res.send(rows);
     }
-    const { quantity } = rows.quantity
+    const { quantity } = rows[0].quantity
     console.log(rows);
     console.log(quantity);
   });
