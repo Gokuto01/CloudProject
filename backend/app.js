@@ -428,7 +428,7 @@ app.get('/payment', (req, res) => {
 //create payent
 app.post('/payment', (req, res) => {
   const { image, date, time, price, reserv_id } = req.body;
-  connection.query('INSERT INTO payment (order_id, image, date, time, price, reserv_id) VALUES (?, ?, ?, ?, ?, ?)',
+  connection.query('INSERT INTO payment (payment_id, image, date, time, price, reserv_id) VALUES (?, ?, ?, ?, ?, ?)',
     [uuidv4(), image, date, time, price, reserv_id], (err, rows, fields) => {
       if (err) {
         console.error('Error executing query: ', err);
