@@ -164,9 +164,19 @@ app.put('/promotion/useCode', (req, res) => {
     } else {
 //       res.send(rows);
     }
-    const { quantity } = rows[0][0]
-    console.log(rows);
-    console.log(quantity);
+    const { quantity, discount } = rows[0]
+    if (quantity >= 1){
+      connection.query('UPDATE promotion SET quantity = ? WHERE code = ?', [quantity - 1, code], (error) => {
+        if (error) {
+          console.error(error);
+          return res.status(500).send('Internal server error');
+        }
+        res.send({discount: discount});
+      });
+    }
+    else {
+      res.send({discount: 0})
+    }
   });
 });
 
