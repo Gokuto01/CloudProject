@@ -453,7 +453,7 @@ app.post('/online/get', (req, res) => {
 //create Online
 app.post('/online', (req, res) => {
   const { course_name, user_id, rider, price } = req.body;
-  connection.query('INSERT INTO online (online_id, course_name, user_id, rider, price, status) VALUES (?, ?, ?, ?, ?)',
+  connection.query('INSERT INTO online (online_id, course_name, user_id, rider, price, status) VALUES (?, ?, ?, ?, ?, ?)',
     [uuidv4(), course_name, user_id, rider, price, "Delivery"], (err, rows, fields) => {
       if (err) {
         console.error('Error executing query: ', err);
