@@ -438,6 +438,31 @@ app.post('/payment', (req, res) => {
     });
 });
 
+//get online
+app.post('/online/get', (req, res) => {
+  const { user_id } = req.body;
+  connection.query('SELECT * FROM online where user_id = ?', (err, rows, fields) => {
+    if (err) {
+      console.error('Error executing query: ', err);
+    } else {
+      res.send(rows);
+    }
+  });
+});
+
+//create Online
+app.post('/online', (req, res) => {
+  const { course_id, user_id, raider, price } = req.body;
+  connection.query('INSERT INTO online (online_id, course_id, user_id, raider, price) VALUES (?, ?, ?, ?, ?)',
+    [uuidv4(), course_id, user_id, raider, price], (err, rows, fields) => {
+      if (err) {
+        console.error('Error executing query: ', err);
+      } else {
+        res.send(rows);
+      }
+    });
+});
+
 app.listen(3000, () => {
   console.log('Server started on port 3000');
 });
