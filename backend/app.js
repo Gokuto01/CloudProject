@@ -368,7 +368,9 @@ app.post('/reservation', (req, res) => {
       if (err) {
         console.error('Error executing query: ', err);
       } else {
-        res.send({rows.insertId});
+        const insertedId = rows.insertId;
+        res.status(201).send({ insertedId });
+
       }
     });
 });
