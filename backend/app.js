@@ -158,27 +158,27 @@ app.delete('/promotion', (req, res) => {
 //usePromotionCode
 app.put('/promotion/useCode', (req, res) => {
   const { code } = req.body;
-  let data;
-  let discount = 0;
-  connection.query('SELECT * FROM promotion where code = ?', [code], (err, rows, fields) => {
-      if (err) {
-        console.error('Error executing query: ', err);
-      } else {
-        discount = rows.discount;
-        data = rows;
-        if (data[0].discount >= 1){
-          connection.query('UPDATE promotion SET code = ?, quantity = ?, discount = ? WHERE code = ?',
-            [data[0].code, data[0].quantity - 1, data[0].discount, code], (err, rows, fields) => {
-              if (err) {
-                console.error('Error executing query: ', err);
-              } else {
-                discount = 0
-              }
-            });
-        }
-        res.send(String(data));
-      }
-    });
+
+  connection.query('SELECT * FROM Promotion WHERE code = ?', [code], (error, results) => {
+    if (error) {
+      console.error(error);
+      return res.status(500).send('Internal server error');
+    }
+
+    const { data } = results[0];
+
+    if (data.quantity >= 1){
+      connection.query('UPDATE Promotion SET quantity = quantity - 1 WHERE code = ?', [code], (error) => {
+            if (error) {
+              console.error(error);
+              return res.status(500).send('Internal server error');
+            }
+          });
+    } else {
+      data.discount = 0;
+    }
+    res.send( data );
+  });
 });
 
 //get food
