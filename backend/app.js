@@ -158,7 +158,7 @@ app.delete('/promotion', (req, res) => {
 //usePromotionCode
 app.put('/promotion/useCode', (req, res) => {
   const { code } = req.body;
-
+  cosnole.log(code)
   connection.query('SELECT * FROM promotion WHERE code = ?', [code], (error, results) => {
     if (error) {
       console.error(error);
@@ -166,8 +166,7 @@ app.put('/promotion/useCode', (req, res) => {
     }
 
     const { data } = results[0];
-    console.log(data)
-    console.log(data.quantity)
+
     if (data.quantity >= 1){
       connection.query('UPDATE promotion SET quantity = ? WHERE code = ?', [data.quantity - 1, code], (error) => {
             if (error) {
