@@ -164,7 +164,7 @@ app.put('/promotion/useCode', (req, res) => {
     } else {
 //       res.send(rows);
     }
-    const { quantity } = rows[0][0].quantity
+    const { quantity } = rows[0][0]
     console.log(rows);
     console.log(quantity);
   });
