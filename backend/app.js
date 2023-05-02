@@ -441,7 +441,7 @@ app.post('/payment', (req, res) => {
 //get online
 app.post('/online/get', (req, res) => {
   const { user_id } = req.body;
-  connection.query('SELECT * FROM online where user_id = ?', (err, rows, fields) => {
+  connection.query('SELECT * FROM online where user_id = ?', [user_id], (err, rows, fields) => {
     if (err) {
       console.error('Error executing query: ', err);
     } else {
