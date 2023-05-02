@@ -241,7 +241,7 @@ app.delete('/course', (req, res) => {
 });
 
 //get review
-app.get('/review', (req, res) => {
+app.post('/review/get', (req, res) => {
   const { rest_id } = req.body;
   connection.query('SELECT * FROM review where rest_id = ?', [rest_id], (err, rows, fields) => {
     if (err) {
@@ -291,7 +291,7 @@ app.delete('/review', (req, res) => {
 });
 
 //get rating
-app.get('/review/rating', (req, res) => {
+app.post('/review/rating', (req, res) => {
   const { rest_id } = req.body;
   connection.query('SELECT avg(rating) as rating FROM review where rest_id = ?', [rest_id], (err, rows, fields) => {
     if (err) {
