@@ -365,13 +365,14 @@ app.get('/reservation', (req, res) => {
 //create reservation
 app.post('/reservation', (req, res) => {
   const { booking_date, eating_date, eating_time, user_id, status, rest_id } = req.body;
+  const id = uuidv4();
   connection.query('INSERT INTO reservation (reserv_id, booking_date, eating_date, eating_time, user_id, status, rest_id) VALUES (?, ?, ?, ?, ?, ?, ?)',
-    [uuidv4(), booking_date, eating_date, eating_time, user_id, "Waiting", rest_id], (err, rows, fields) => {
+    [id, booking_date, eating_date, eating_time, user_id, "Waiting", rest_id], (err, rows, fields) => {
       if (err) {
         console.error('Error executing query: ', err);
       } else {
         const insertedId = rows.insertId;
-        res.status(201).send({ insertedId });
+        res..send({ resv_id: id });
 
       }
     });
