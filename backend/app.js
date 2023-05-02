@@ -168,7 +168,7 @@ app.put('/promotion/useCode', (req, res) => {
     const { data } = results[0];
 
     if (data.quantity >= 1){
-      connection.query('UPDATE Promotion SET quantity = quantity - 1 WHERE code = ?', [code], (error) => {
+      connection.query('UPDATE Promotion SET quantity = ? WHERE code = ?', [data.discount - 1, code], (error) => {
             if (error) {
               console.error(error);
               return res.status(500).send('Internal server error');
