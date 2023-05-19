@@ -463,6 +463,17 @@ app.post('/online', (req, res) => {
     });
 });
 
+//get food
+app.get('/food', (req, res) => {
+  connection.query('SELECT * FROM food', (err, rows, fields) => {
+    if (err) {
+      console.error('Error executing query: ', err);
+    } else {
+      res.send(rows);
+    }
+  });
+});
+
 app.listen(3000, () => {
   console.log('Server started on port 3000');
 });
