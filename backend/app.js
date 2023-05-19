@@ -380,7 +380,7 @@ app.post('/reservation', (req, res) => {
 //update reservation
 app.put('/reservation', (req, res) => {
   const { reserv_id, booking_date, eating_date, eating_time, user_id, status, rest_id } = req.body;
-  connection.query('UPDATE seat SET booking_date = ?, eating_date = ?, eating_time = ?, user_id = ?, status = ?, rest_id = ? WHERE reserv_id = ?',
+  connection.query('UPDATE reservation SET booking_date = ?, eating_date = ?, eating_time = ?, user_id = ?, status = ?, rest_id = ? WHERE reserv_id = ?',
     [booking_date, eating_date, eating_time, user_id, status, rest_id, reserv_id], (err, rows, fields) => {
       if (err) {
         console.error('Error executing query: ', err);
